@@ -133,7 +133,7 @@
                                                     </div>
                                                     <div class="col-md-1 pb-15">
                                                         <div class="form-group form-md-line-input margin-zero">
-                                                            <input type="text" id="digits" placeholder="001" class="form-control padding-zero font-bold">
+                                                            <input type="number" id="digits" placeholder="001" class="form-control padding-zero font-bold">
                                                             <label class="control-label margin-zero font-light">&nbsp;</label>
                                                         </div>
                                                     </div>
@@ -285,11 +285,11 @@
                                             <div class="row">
                                                 <div class="col-md-6 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <select class="form-control font-bold" id="form_control_1">
-                                                            <option value="1" selected="">Select Registration Type</option>
+                                                        <select class="form-control font-bold gst-registration-type" id="form_control_1">
+                                                            <option value="1"  selected="">Select Registration Type</option>
                                                             <option value="2">Registered under Regular Scheme</option>
                                                             <option value="3">Registered under Composition Scheme</option>
-                                                            <option value="4">Unregistered</option>
+                                                            <option value="unregistered">Unregistered</option>
                                                             <option value="5">Consumer</option>
                                                             <option value="6">Overseas</option>
                                                             <option value="7">SEZ</option>
@@ -306,13 +306,13 @@
                                                 </div>
                                                 <div class="col-md-6 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="(dd/mm/yyyy)" data-date-format="dd-mm-yyyy" class="form-control form-control-inline date-picker padding-zero font-bold">
+                                                        <input id="gst-registration-date" type="text" placeholder="(dd/mm/yyyy)" data-date-format="dd-mm-yyyy" class="form-control form-control-inline date-picker padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light">Registration Date : </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <select class="form-control padding-zero font-bold">
+                                                        <select id="nature-of-business" class="form-control padding-zero font-bold">
                                                             <option>Select Your Business</option>
                                                             <option>Goods</option>
                                                             <option>Services</option>
@@ -1260,21 +1260,9 @@
 
 			});
 
-			
+		// invoice format End
 
-		/*$("#digits").keyup(function(){
-            var mapl = $("#mapl").val();
-            var seprator = $("#seprator").val();
-            var digits = $("#digits").val();
-
-            var format = mapl+seprator+digits;
-            $("#invoice-format").val(format);
-            //
-            //console.log(mapl,seprator,digits);
-        });*/
-		
-        // invoice format End
-
+		//GST Number start
 
 		$("#gst-number").keyup(function(){
 			var twoChar = $(this).val().substr(0,2);
@@ -1288,19 +1276,42 @@
 			}
 		});
 
-		$("#gst-number").blur(function(){
+		$("#gst-number").change(function(){
 				var gstVall = $(this).val();
-				var panVall = $("#pan-number").val();
+				var txtpan = $("#pan-number").val();
 				//console.log(panVall);
 
 				var threeToTwelveDigits = gstVall.substring(2,13);
 				//console.log(threeToTwelveDigits);
-				if(panVall != threeToTwelveDigits){
+
+				if(txtpan != threeToTwelveDigits){
 					$(this).parent().addClass('has-error');
+					$(this).parent().find('.error-message').remove();
+				    $(this).parent().find('label').after('<span class="error-message" id="error">Invalid GST Number. Does not match with PAN number !!</span>');
+				}else if(txtpan.length < 15 || txtpan.length > 15){
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('.error-message').remove();
+				    $(this).parent().find('label').after('<span class="error-message" id="error">GST number has to 15 digits.</span>');
 				}
 				
 		});
+		// GST Number End
 
+		// GST Registration Start
+
+		$(".gst-registration-type").change(function(){
+			var gstRegistrationVall = $(this).val();
+
+			if(gstRegistrationVall == 'unregistered'){
+				$("#gst-number").attr('disabled','disabled');
+				$("#gst-registration-date").attr('disabled','disabled');
+				$("#nature-of-business").attr('disabled','disabled');
+			}
+			
+			
+		});
+
+		// GST Registration End
 
 	});
 

@@ -830,7 +830,7 @@
                                                 <div class="col-md-10 margin-zero padding-zero">
                                                     <div class="md-radio-inline">
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio17" name="radio15" class="md-radiobtn" checked="">
+                                                            <input type="radio" id="radio17" name="customer" class="md-radiobtn" checked="">
                                                             <label for="radio17">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -838,7 +838,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio18" name="radio15" class="md-radiobtn">
+                                                            <input type="radio" id="radio18" name="vendor" class="md-radiobtn">
                                                             <label for="radio18">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -846,7 +846,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio19" name="radio15" class="md-radiobtn">
+                                                            <input type="radio" id="radio19" name="others" class="md-radiobtn">
                                                             <label for="radio19">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -877,7 +877,7 @@
                                             <div class="row">
                                                 <div class="col-md-4 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input id="form_control_1" type="text" placeholder="Enter Name" class="form-control padding-zero font-bold">
+                                                        <input id="form_control_1" type="text" placeholder="Enter Name" class="form-control padding-zero font-bold enter-name">
                                                         <label class="control-label margin-zero font-light"><span class="mandatory-sign">*</span>Account Name : </label>
                                                     </div>
                                                 </div>
@@ -1568,5 +1568,16 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+
+            $(".enter-name").val();
+        });
+
+    </script>
+
+
 </body>
 </html>
