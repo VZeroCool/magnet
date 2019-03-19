@@ -1,0 +1,65 @@
+﻿.page-sidebar-wrapper{
+    position: fixed;
+    left: 0px;
+    overflow: auto;
+    height: 90%;
+    z-index: 9999;
+}
+.topselection   {  
+	padding: 12px 20px 15px;
+    background-color: #fff;
+    border-radius: 5px !important;
+    border: 1px solid #ecf0f1;
+    margin-bottom: 20px;
+}
+.topselection.md-radio-inline{ margin-bottom: 0px; }
+.topselection .md-radio label{ margin-bottom: 0px; color: #333;}
+.topselection .md-radio-inline{ margin-bottom: 0px; border-bottom: 0px;}
+.portlet.light>.portlet-title {
+    padding: 10px;
+    background: #c4e9fa;
+    margin:-12px -20px 10px -20px;
+}
+.compheading {
+    color: #007bb4;
+    font-size: 16px !important;
+}
+.portlet.light .portlet-body {
+    padding-top: 18px;
+}
+.form-group.form-md-line-input .form-control~label{ font-size: 13px; }
+.md-radio input[type=radio]:checked~label>.check,
+.md-radio label.active >.check {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1);
+}
+.dashboard-year{
+	padding:10px 0px !important;
+}
+.dashboard-year .pull-right > select {
+	background: transparent;
+	color: #ffffff;
+	border:0px;
+}
+.has-error{ position: relative; }
+.has-error .error-message{
+    position: absolute;
+    left:0px;
+    bottom: -13px;
+    font-size: 10px;
+    color: #e84955;
+    font-weight: 600;
+}
+.mandatory-sign{
+    font-size: 12px;
+    color: #e84955;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 2px;
+}
+.modal-body{
+    max-height: 450px;
+    overflow-y: scroll; 
+}
