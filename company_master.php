@@ -75,13 +75,13 @@
                                                     </div>
                                                     <div class="col-md-4 pb-15">
                                                         <div class="form-group form-md-line-input margin-zero">
-                                                            <input type="text" placeholder="AAAAA9999A" id="pan-number" class="form-control padding-zero font-bold">
+                                                            <input type="text" placeholder="AAAAA9999A" id="pan-number" maxlength="10" class="form-control padding-zero font-bold">
                                                             <label class="control-label margin-zero font-light">PAN Number : </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 pb-15">
                                                         <div class="form-group form-md-line-input margin-zero">
-                                                            <input type="text" id="tan-number" placeholder="AAAA99999A" class="form-control padding-zero font-bold">
+                                                            <input type="text" id="tan-number" maxlength="10" placeholder="AAAA99999A" class="form-control padding-zero font-bold">
                                                             <label class="control-label margin-zero font-light">TAN Number : </label>
                                                         </div>
                                                     </div>
@@ -183,7 +183,7 @@
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="Enter Pincode" class="form-control padding-zero font-bold">
+                                                        <input type="number" id="postcode" placeholder="Enter Pincode" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light"><span class="mandatory-sign">*</span>Pincode : </label>
                                                     </div>
                                                 </div>
@@ -201,13 +201,13 @@
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="Enter STD Code" class="form-control padding-zero font-bold">
+                                                        <input type="number" id="std-code" placeholder="Enter STD Code" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light">STD Code : </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="Enter Office Number" class="form-control padding-zero font-bold">
+                                                        <input type="number" id="office-no" placeholder="Enter Office Number" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light">Office Number : </label>
                                                     </div>
                                                 </div>
@@ -219,7 +219,7 @@
                                                 </div>
                                                 <div class="col-md-2 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="9987654321" class="form-control padding-zero font-bold">
+                                                        <input type="number" id="mob-no" placeholder="9987654321" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light"><span class="mandatory-sign">*</span>Mobile Number :</label>
                                                     </div>
                                                 </div>
@@ -1141,7 +1141,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#pan-number").keyup(function(){
+		$("#pan-number").change(function(){
 			/*$(this).find('label').after("<span class='error-message' id='error'>Pleas enter valid details</span>");*/
 				//$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
 			var matchString = ['P','C','H','A','B','G','J','L','F','T'];
@@ -1262,6 +1262,41 @@
 
 		// invoice format End
 
+
+		// Pincode start
+
+
+		$("#postcode").change(function(){
+			var postCode = $(this).val();
+			console.log(postCode);
+			if(postCode.length > 6 || postCode.length < 6){
+				$(this).parent().addClass('has-error');
+				$(this).parent().find('.error-message').remove();
+			    $(this).parent().find('label').after('<span class="error-message" id="error">Postcode must be 6 digits only.</span>');
+			}else{
+				$(this).parent().removeClass('has-error');
+				$(this).parent().find('#error').remove();	
+			}
+		});
+
+		// Postcode end
+
+
+		//mobile number start
+			$("#mob-no").change(function(){
+				var mobNo = $(this).val();
+				if(mobNo.length > 10 || mobNo.length < 10){
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('.error-message').remove();
+				    $(this).parent().find('label').after('<span class="error-message" id="error">Mobile number must be 10 digits only.</span>');	
+				}else{
+					$(this).parent().removeClass('has-error');
+					$(this).parent().find('#error').remove();
+				}
+			});	
+
+		// Mobile number end
+
 		//GST Number start
 
 		$("#gst-number").keyup(function(){
@@ -1306,7 +1341,9 @@
 				$("#gst-number").attr('disabled','disabled');
 				$("#gst-registration-date").attr('disabled','disabled');
 				$("#nature-of-business").attr('disabled','disabled');
-			}
+			}else{
+                    $("#gst-number").removeAttr('disabled','disabled');
+            }
 			
 			
 		});
@@ -1316,3 +1353,11 @@
 	});
 
 </script>
+
+<style type="text/css">
+	input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+</style>

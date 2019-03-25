@@ -830,7 +830,7 @@
                                                 <div class="col-md-10 margin-zero padding-zero">
                                                     <div class="md-radio-inline">
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio17" name="customer" class="md-radiobtn" checked="">
+                                                            <input type="radio" id="radio17" name="account-type" value="customer" class="md-radiobtn">
                                                             <label for="radio17">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -838,7 +838,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio18" name="vendor" class="md-radiobtn">
+                                                            <input type="radio" id="radio18" value="vendor" name="account-type" class="md-radiobtn">
                                                             <label for="radio18">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -846,7 +846,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="md-radio">
-                                                            <input type="radio" id="radio19" name="others" class="md-radiobtn">
+                                                            <input type="radio" id="radio19" value="others" name="account-type" class="md-radiobtn">
                                                             <label for="radio19">
                                                                 <span></span>
                                                                 <span class="check"></span>
@@ -883,7 +883,7 @@
                                                 </div>
                                                 <div class="col-md-7 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input id="form_control_1" type="text" placeholder="Enter Company Name" class="form-control padding-zero font-bold">
+                                                        <input id="form_control_1" type="text" placeholder="Enter Company Name" class="form-control padding-zero font-bold company-name">
                                                         <label class="control-label margin-zero font-light"><span class="mandatory-sign">*</span>Company Name : </label>
                                                     </div>
                                                 </div>
@@ -894,22 +894,22 @@
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <select class="form-control font-bold" id="form_control_1">
+                                                        <select class="form-control font-bold display-name" id="form_control_1">
                                                             <option value="1" selected="">Select Display Name as</option>
-                                                            <option value="2">Option 2</option>
+                                                            <!-- <option value="2">Option 2</option>
                                                             <option value="3">Option 3</option>
-                                                            <option value="4">Option 4</option>
+                                                            <option value="4">Option 4</option> -->
                                                         </select>
                                                         <label class="control-label margin-zero font-light">Display Name as : </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <select class="form-control font-bold" id="form_control_1">
+                                                        <select class="form-control font-bold account-head" id="form_control_1">
                                                             <option value="1" selected="">Select Account Head</option>
-                                                            <option value="2">Option 2</option>
+                                                            <!-- <option value="2">Option 2</option>
                                                             <option value="3">Option 3</option>
-                                                            <option value="4">Option 4</option>
+                                                            <option value="4">Option 4</option> -->
                                                         </select>
                                                         <label class="control-label margin-zero font-light">Account Head : </label>
                                                     </div>
@@ -929,33 +929,33 @@
                                                 </div>
                                                 <div class="col-md-4 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="0.00" class="form-control padding-zero font-bold">
+                                                        <input type="text" value="0" placeholder="0.00" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light">Opening Balance : </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pb-15">
                                                 <div class="form-group form-md-line-input margin-zero">
-                                                    <select class="form-control font-bold" id="form_control_1">
+                                                    <select class="form-control font-bold debit-credit" id="form_control_1">
                                                         <option value="1" selected="">Select Type</option>
-                                                        <option value="2">Debit</option>
-                                                        <option value="3">Credit</option>
+                                                        <!-- <option value="2">Debit</option>
+                                                        <option value="3">Credit</option> -->
                                                     </select>
                                                     <label class="control-label margin-zero font-light">Debit / Credit : </label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 pb-15">
                                                 <div class="form-group form-md-line-input margin-zero">
-                                                    <input type="text" placeholder="(dd/mm/yyyy)" data-date-format="dd-mm-yyyy" class="form-control form-control-inline date-picker padding-zero font-bold" size="16">
+                                                    <input type="text" id="as-of-date" placeholder="(dd/mm/yyyy)" data-date-format="dd/mm/yyyy" class="form-control form-control-inline date-picker padding-zero font-bold" size="16">
                                                     <label class="control-label margin-zero font-light">As of Date : </label>
                                                 </div>
                                             </div>
                                                 <div class="col-md-4 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <select class="form-control font-bold" id="form_control_1">
+                                                        <select class="form-control font-bold gst-registration-type" id="form_control_1">
                                                             <option value="1" selected="">Select Registration Type</option>
                                                             <option value="2">Registered under Regular Scheme</option>
                                                             <option value="3">Registered under Composition Scheme</option>
-                                                            <option value="4">Unregistered</option>
+                                                            <option value="unregistered">Unregistered</option>
                                                             <option value="5">Consumer</option>
                                                             <option value="6">Overseas</option>
                                                             <option value="7">SEZ</option>
@@ -966,14 +966,14 @@
                                                 </div>
                                                 <div class="col-md-4 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="Enter GSTIN Number" class="form-control padding-zero font-bold">
-                                                        <label class="control-label margin-zero font-light">GSTIN : </label>
+                                                        <input type="text" id="pan" placeholder="AAAAA9999A" class="form-control padding-zero font-bold">
+                                                        <label class="control-label margin-zero font-light">PAN Number : </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" placeholder="AAAAA9999A" class="form-control padding-zero font-bold">
-                                                        <label class="control-label margin-zero font-light">PAN Number : </label>
+                                                        <input type="text" id="gst-number" placeholder="Enter GSTIN Number" class="form-control padding-zero font-bold">
+                                                        <label class="control-label margin-zero font-light">GSTIN : </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1573,7 +1573,111 @@
         
         $(document).ready(function(){
 
-            $(".enter-name").val();
+            // set today's date
+
+            $("#as-of-date").datepicker().datepicker("setDate", new Date());
+
+            // Set default value for debit/credit
+
+            $('input[type=radio][name=account-type]').change(function() {
+                var vall = $(this).val();
+                if(vall == 'customer'){
+                     $(".debit-credit option").each(function() {
+                        $(this).remove();
+                    });
+                    $(".account-head option").each(function() {
+                        $(this).remove();
+                    });
+                    $('.debit-credit').append('<option value="debit">Debit</option>');    
+                    $('.account-head').append('<option value="debitors">Sundry Debitors</option>');
+                }else if(vall == 'vendor'){
+                    $(".debit-credit option").each(function() {
+                        $(this).remove();
+                    });
+                    $(".account-head option").each(function() {
+                        $(this).remove();
+                    });
+                    $('.debit-credit').append('<option value="credit">Credit</option>');
+                    $('.account-head').append('<option value="creditors">Sundry Creditors</option>');
+                }else if(vall == 'others'){
+                    //$('.account-head').parent().find('label').html('<span class="mandatory-sign">*</span>');
+                    $(".debit-credit option").each(function() {
+                        $(this).remove();
+                    });
+                    $(".account-head option").each(function() {
+                        $(this).remove();
+                    });
+                    $('.debit-credit').append('<option value="credit">Credit</option>');
+                    $('.debit-credit').append('<option value="debit">Debit</option>');
+                }
+            });
+
+            // Set display name
+            $(".enter-name").change(function(){
+           
+                var name = $(this).val().toLowerCase();
+
+                $(".company-name").change(function(){
+                    var companyName = $(this).val().toLowerCase();
+
+                    $('.display-name').append('<option value='+name+'>'+name+'</option>');
+                    $('.display-name').append('<option value='+companyName+'>'+companyName+'</option>');
+                });
+            });
+
+            // GST Registration Type
+
+            $(".gst-registration-type").change(function(){
+                var gstRegistrationVall = $(this).val();
+
+                if(gstRegistrationVall == 'unregistered'){
+                    $("#gst-number").attr('disabled','disabled');
+                }else{
+                    $("#gst-number").removeAttr('disabled','disabled');
+                }
+            });
+
+            // PAN start
+
+            $("#pan").keyup(function(){
+                var matchString = ['P','C','H','A','B','G','J','L','F','T'];
+                var fourthLetter = $(this).val().charAt(3);
+                var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+
+                if(matchString.indexOf(fourthLetter) === -1){
+                    $(this).parent().addClass('has-error');
+                    $(this).parent().find('.error-message').remove();
+                    $(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+                    
+                }else{
+                    $(this).parent().removeClass('has-error');
+                    $(this).parent().find('#error').remove();
+                }
+            });
+
+
+
+            $("#pan").change(function(){
+                 var panRegex = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/; 
+                 var txtpan = $(this).val(); 
+
+                 if (txtpan.length == 10 ) { 
+                    if(txtpan.match(panRegex)){
+                        $(this).parent().removeClass('has-error');
+                        $(this).parent().find('#error').remove();
+                    }else{
+                        $(this).parent().addClass('has-error');
+                        $(this).parent().find('.error-message').remove();
+                        $(this).parent().find('label').after('<span class="error-message" id="error">Invalid PAN Number.Try Again !!</span>');
+                    }
+                 }else{
+                    $(this).parent().addClass('has-error');
+                    $(this).parent().find('.error-message').remove();
+                    $(this).parent().find('label').after('<span class="error-message" id="error">PAN must be 10 digits.</span>');
+                 }
+            });
+
+            //jQuery('.account-head').parent().find('label').html('<span class="mandatory-sign">*</span>');
         });
 
     </script>
