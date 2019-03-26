@@ -183,7 +183,9 @@
                                                 </div>
                                                 <div class="col-md-3 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="number" id="postcode" placeholder="Enter Pincode" class="form-control padding-zero font-bold">
+                                                        <input type="number" id="postcode" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type = "number"
+    maxlength = "6" placeholder="Enter Pincode" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light"><span class="mandatory-sign">*</span>Pincode : </label>
                                                     </div>
                                                 </div>
@@ -1141,22 +1143,40 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#pan-number").change(function(){
-			/*$(this).find('label').after("<span class='error-message' id='error'>Pleas enter valid details</span>");*/
-				//$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+		$("#pan-number").keyup(function(){
+			
 			var matchString = ['P','C','H','A','B','G','J','L','F','T'];
-			var fourthLetter = $(this).val().charAt(3);
-			var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+			var fourthLetter = $(this).val().charAt(3); //AAAAA9999A
+            var sixthLetter = $(this).val().charAt(5);
+            var seventhLetter = $(this).val().charAt(6);
+            var eightLetter = $(this).val().charAt(7);
+            var ninethLetter = $(this).val().charAt(8);
 
-			if(matchString.indexOf(fourthLetter) === -1){
+            if(matchString.indexOf(fourthLetter) === -1){
 				$(this).parent().addClass('has-error');
 				$(this).parent().find('.error-message').remove();
 				$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
 				
-			}else{
-				$(this).parent().removeClass('has-error');
-				$(this).parent().find('#error').remove();
-			}
+			}else if(isNaN(sixthLetter)){
+				$(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Sixth letter has to numeric</span>');
+			}else if(isNaN(seventhLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Seventh letter has to numeric</span>');
+            }else if(isNaN(eightLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Eighth letter has to numeric</span>');
+            }else if(isNaN(ninethLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Nineth letter has to numeric</span>');
+            }else{
+                $(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+            }
 		});
 
 
@@ -1165,8 +1185,7 @@
 			 var panRegex = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/; 
  			 var txtpan = $(this).val(); 
 
- 			 if (txtpan.length == 10 ) { 
- 			 	if(txtpan.match(panRegex)){
+ 			    if(txtpan.match(panRegex)){
  			 		$(this).parent().removeClass('has-error');
 					$(this).parent().find('#error').remove();
  			 	}else{
@@ -1174,19 +1193,82 @@
  			 		$(this).parent().find('.error-message').remove();
 				    $(this).parent().find('label').after('<span class="error-message" id="error">Invalid PAN Number.Try Again !!</span>');
  			 	}
- 			 }else{
- 			 	$(this).parent().addClass('has-error');
- 			 	$(this).parent().find('.error-message').remove();
-				$(this).parent().find('label').after('<span class="error-message" id="error">PAN must be 10 digits.</span>');
- 			 }
-		});
+ 		});
+
+        $("#pan-number").focusout(function(){
+            if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
+                $(this).parent().find('#error').remove();
+                $(this).parent().removeClass('has-error');
+            }
+        });
+
+        // TAN Number start
+
+        
+        $("#tan-number").keyup(function(){
+            //AAAAA9999A
+            var tanNumber = $(this).val();
+            var tanRegex = /[a-zA-z]{4}\d{5}[a-zA-Z]{1}/;
+
+            var firstLetter = $(this).val().charAt(0);
+            var secondLetter = $(this).val().charAt(1);
+            var thirdLetter = $(this).val().charAt(2);
+            var fourthLetter = $(this).val().charAt(3);
+            var fifthLetter = $(this).val().charAt(4);
+
+            //console.log(firstLetter.length);
+
+            if(firstLetter.length === 1 && isNaN(firstLetter)){
+                $(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+            }else{
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">First letter has to alphabatic</span>');
+            }
+
+            if(secondLetter.length === 1 && isNaN(secondLetter)){
+                $(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+            }else{
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Second letter has to alphabatic</span>');
+            }
 
 
-		$("#tan-number").change(function(){
+            
+            /*if($(this).val().match(tanRegex)){
+                 $(this).parent().removeClass('has-error');
+                 $(this).parent().find('#error').remove();
+            }else if(!isNaN(firstLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">First letter has to alphabatic</span>');
+            }else if(!isNaN(secondLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Second letter has to alphabatic</span>');
+            }else if(!isNaN(thirdLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Third letter has to alphabatic</span>');
+            }else if(!isNaN(fourthLetter)){
+                $(this).parent().addClass('has-error');
+                $(this).parent().find('.error-message').remove();
+                $(this).parent().find('label').after('<span class="error-message" id="error">Fourth letter has to alphabatic</span>');
+            }else{
+                $(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+            }*/
+        });
+
+
+        $("#tan-number").change(function(){
 			var tanRegex = /[a-zA-z]{4}\d{5}[a-zA-Z]{1}/;   //AAAA99999A
 			var tanVall = $(this).val();
 
-			if(tanVall.length == 10){
+			//if(tanVall.length == 10){
 				if(tanVall.match(tanRegex)){
 					$(this).parent().removeClass('has-error');
 					$(this).parent().find('#error').remove();
@@ -1195,12 +1277,21 @@
 					$(this).parent().find('.error-message').remove();
 				    $(this).parent().find('label').after('<span class="error-message" id="error">Invalid PAN Number.Try Again !!</span>');
 				}
-			}else{
+			/*}else{
 				$(this).parent().addClass('has-error');
 				$(this).parent().find('.error-message').remove();
 				$(this).parent().find('label').after('<span class="error-message" id="error">PAN must be 10 digits.</span>');
-			}  
+			}*/  
 		});
+
+        $("#tan-number").focusout(function(){
+            if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
+                $(this).parent().find('#error').remove();
+                $(this).parent().removeClass('has-error');
+            }
+        });
+
+        // TAN number end
 
 		$("#book-start-date").change(function(){
 
@@ -1260,6 +1351,13 @@
 
 			});
 
+
+            document.getElementById('digits').addEventListener('keydown', function(e) {
+                if (e.which === 38 || e.which === 40) {
+                    e.preventDefault();
+                }
+            });
+
 		// invoice format End
 
 
@@ -1268,8 +1366,8 @@
 
 		$("#postcode").change(function(){
 			var postCode = $(this).val();
-			console.log(postCode);
-			if(postCode.length > 6 || postCode.length < 6){
+			//console.log(postCode);
+			if(postCode.length > 0 && postCode.length <= 6){
 				$(this).parent().addClass('has-error');
 				$(this).parent().find('.error-message').remove();
 			    $(this).parent().find('label').after('<span class="error-message" id="error">Postcode must be 6 digits only.</span>');
@@ -1278,6 +1376,12 @@
 				$(this).parent().find('#error').remove();	
 			}
 		});
+
+		document.getElementById('postcode').addEventListener('keydown', function(e) {
+                if (e.which === 38 || e.which === 40) {
+                    e.preventDefault();
+                }
+            });
 
 		// Postcode end
 
@@ -1340,9 +1444,11 @@
 			if(gstRegistrationVall == 'unregistered'){
 				$("#gst-number").attr('disabled','disabled');
 				$("#gst-registration-date").attr('disabled','disabled');
-				$("#nature-of-business").attr('disabled','disabled');
+				//$("#nature-of-business").attr('disabled','disabled');
 			}else{
                     $("#gst-number").removeAttr('disabled','disabled');
+                    $("#gst-registration-date").removeAttr('disabled','disabled');
+                    
             }
 			
 			
