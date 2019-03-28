@@ -302,7 +302,7 @@
                                                 </div>
                                                 <div class="col-md-6 pb-15">
                                                     <div class="form-group form-md-line-input margin-zero">
-                                                        <input type="text" id="gst-number" placeholder="Enter GST Number" class="form-control padding-zero font-bold">
+                                                        <input type="text" id="gst-number" maxlength="15" placeholder="Enter GST Number" class="form-control padding-zero font-bold">
                                                         <label class="control-label margin-zero font-light">GST Number : </label>
                                                     </div>
                                                 </div>
@@ -1143,7 +1143,44 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		$("#pan-number").change(function(){
+			
+			var panRegex = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+			var panNumber = $(this).val();
+
+			if(panNumber.match(panRegex)){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}else{
+				
+                $(this).parent().addClass('has-error');
+				$(this).parent().find('.error-message').remove();
+				$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+			}
+
+		});
+
 		$("#pan-number").keyup(function(){
+			if($(this).val().length == 0){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}
+		});
+
+		$("#pan-number").focusout(function(){
+            if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
+                $(this).parent().find('#error').remove();
+                $(this).parent().removeClass('has-error');
+            }
+        });
+
+		/*$("#pan-number").keyup(function(){
+			console.log($(this).val().length);
+			if($(this).val().length == '0'){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}
 			
 			var matchString = ['P','C','H','A','B','G','J','L','F','T'];
 			var fourthLetter = $(this).val().charAt(3); //AAAAA9999A
@@ -1200,12 +1237,41 @@
                 $(this).parent().find('#error').remove();
                 $(this).parent().removeClass('has-error');
             }
-        });
+        });*/
 
         // TAN Number start
+        $("#tan-number").change(function(){
 
-        
+        	var tanNumber = $(this).val();
+        	var tanRegex = /[a-zA-z]{4}\d{5}[a-zA-Z]{1}/;
+
+        	if(tanNumber.match(tanRegex)){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}else{
+				
+                $(this).parent().addClass('has-error');
+				$(this).parent().find('.error-message').remove();
+				$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+			}
+
+        });
+
         $("#tan-number").keyup(function(){
+			if($(this).val().length == 0){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}
+		});
+
+		$("#tan-number").focusout(function(){
+            if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
+                $(this).parent().find('#error').remove();
+                $(this).parent().removeClass('has-error');
+            }
+        });
+        
+        /*$("#tan-number").keyup(function(){
             //AAAAA9999A
             var tanNumber = $(this).val();
             var tanRegex = /[a-zA-z]{4}\d{5}[a-zA-Z]{1}/;
@@ -1234,7 +1300,7 @@
                 $(this).parent().addClass('has-error');
                 $(this).parent().find('.error-message').remove();
                 $(this).parent().find('label').after('<span class="error-message" id="error">Second letter has to alphabatic</span>');
-            }
+            }*/
 
 
             
@@ -1261,10 +1327,10 @@
                 $(this).parent().removeClass('has-error');
                 $(this).parent().find('#error').remove();
             }*/
-        });
+        //});
 
 
-        $("#tan-number").change(function(){
+        /*$("#tan-number").change(function(){
 			var tanRegex = /[a-zA-z]{4}\d{5}[a-zA-Z]{1}/;   //AAAA99999A
 			var tanVall = $(this).val();
 
@@ -1276,20 +1342,20 @@
 					$(this).parent().addClass('has-error');
 					$(this).parent().find('.error-message').remove();
 				    $(this).parent().find('label').after('<span class="error-message" id="error">Invalid PAN Number.Try Again !!</span>');
-				}
+				}*/
 			/*}else{
 				$(this).parent().addClass('has-error');
 				$(this).parent().find('.error-message').remove();
 				$(this).parent().find('label').after('<span class="error-message" id="error">PAN must be 10 digits.</span>');
 			}*/  
-		});
+		//});
 
-        $("#tan-number").focusout(function(){
+        /*$("#tan-number").focusout(function(){
             if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
                 $(this).parent().find('#error').remove();
                 $(this).parent().removeClass('has-error');
             }
-        });
+        });*/
 
         // TAN number end
 
@@ -1403,7 +1469,57 @@
 
 		//GST Number start
 
+		$("#gst-number").change(function(){
+
+			var gstNumber = $(this).val();
+			var gstRegex = /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/;
+			var panNumber = $("#pan-number").val();
+			console.log(panNumber.length);
+
+			if(panNumber.length > 0){
+				if(typeof(panNumber) != "undefined" && panNumber !== null){
+					var threeToTwelveDigits = gstNumber.substring(2,13);
+					//console.log(threeToTwelveDigits);
+					if(threeToTwelveDigits == panNumber){
+							$(this).parent().removeClass('has-error');
+	                		$(this).parent().find('#error').remove();
+					}else{
+						$(this).parent().addClass('has-error');
+						$(this).parent().find('.error-message').remove();
+						$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+					}
+				}
+			}
+				
+
+			if(gstNumber.match(gstRegex)){
+				alert('in if');
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}else{
+				alert('in else');
+                $(this).parent().addClass('has-error');
+				$(this).parent().find('.error-message').remove();
+				$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+			}
+
+		});
+
 		$("#gst-number").keyup(function(){
+			if($(this).val().length == 0){
+				$(this).parent().removeClass('has-error');
+                $(this).parent().find('#error').remove();
+			}
+		});
+
+		$("#gst-number").focusout(function(){
+            if($(this).val() === '' || $(this).val() === null || $(this).val() === '0' || $(this).val() === 'undefined'){
+                $(this).parent().find('#error').remove();
+                $(this).parent().removeClass('has-error');
+            }
+        });
+
+		/*$("#gst-number").keyup(function(){
 			var twoChar = $(this).val().substr(0,2);
 			var checkSum = ['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37'];
 
@@ -1433,7 +1549,7 @@
 				    $(this).parent().find('label').after('<span class="error-message" id="error">GST number has to 15 digits.</span>');
 				}
 				
-		});
+		});*/
 		// GST Number End
 
 		// GST Registration Start
