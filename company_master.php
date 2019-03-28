@@ -1148,6 +1148,8 @@
 			
 			var panRegex = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
 			var panNumber = $(this).val();
+			console.log(panNumber.length);
+
 
 			if(panNumber.match(panRegex)){
 				$(this).parent().removeClass('has-error');
@@ -1432,14 +1434,16 @@
 
 		$("#postcode").change(function(){
 			var postCode = $(this).val();
+			//var postcodeRegex = ^[1-9][0-9]{5}$;
 			//console.log(postCode);
-			if(postCode.length > 0 && postCode.length <= 6){
+			if(postCode.length > 6 || postCode.length < 6){
+				
 				$(this).parent().addClass('has-error');
 				$(this).parent().find('.error-message').remove();
 			    $(this).parent().find('label').after('<span class="error-message" id="error">Postcode must be 6 digits only.</span>');
 			}else{
 				$(this).parent().removeClass('has-error');
-				$(this).parent().find('#error').remove();	
+				$(this).parent().find('#error').remove();
 			}
 		});
 
@@ -1469,40 +1473,42 @@
 
 		//GST Number start
 
-		$("#gst-number").change(function(){
+		$("#gst-number").blur(function(){
 
 			var gstNumber = $(this).val();
 			var gstRegex = /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/;
 			var panNumber = $("#pan-number").val();
-			console.log(panNumber.length);
+			var threeToTwelveDigits = gstNumber.substring(2,12);
+			//console.log(panNumber.length);
 
 			if(panNumber.length > 0){
-				if(typeof(panNumber) != "undefined" && panNumber !== null){
-					var threeToTwelveDigits = gstNumber.substring(2,13);
-					//console.log(threeToTwelveDigits);
-					if(threeToTwelveDigits == panNumber){
-							$(this).parent().removeClass('has-error');
-	                		$(this).parent().find('#error').remove();
+
+				if(panNumber == threeToTwelveDigits){
+					if(gstNumber.match(gstRegex)){
+						$(this).parent().removeClass('has-error');
+	                	$(this).parent().find('#error').remove();
 					}else{
 						$(this).parent().addClass('has-error');
 						$(this).parent().find('.error-message').remove();
-						$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+						$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter GST Number</span>');
 					}
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('.error-message').remove();
+					$(this).parent().find('label').after('<span class="error-message" id="error">Entered pan number doesnt mactch with GST</span>');
 				}
-			}
-				
-
-			if(gstNumber.match(gstRegex)){
-				alert('in if');
-				$(this).parent().removeClass('has-error');
-                $(this).parent().find('#error').remove();
 			}else{
-				alert('in else');
-                $(this).parent().addClass('has-error');
-				$(this).parent().find('.error-message').remove();
-				$(this).parent().find('label').after('<span class="error-message" id="error">Pleas enter valid details</span>');
+				alert('right place');
+				if(gstNumber.match(gstRegex)){
+					$(this).parent().removeClass('has-error');
+	                $(this).parent().find('#error').remove();
+				}else{
+					$(this).parent().addClass('has-error');
+					$(this).parent().find('.error-message').remove();
+					$(this).parent().find('label').after('<span class="error-message" id="error">Entered pan number doesnt mactch with GST</span>');
+				}	
 			}
-
+			
 		});
 
 		$("#gst-number").keyup(function(){
@@ -1519,37 +1525,7 @@
             }
         });
 
-		/*$("#gst-number").keyup(function(){
-			var twoChar = $(this).val().substr(0,2);
-			var checkSum = ['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37'];
-
-			if(checkSum.indexOf(twoChar) === -1){
-				$(this).parent().addClass('has-error');
-			}else{
-				$(this).parent().removeClass('has-error');
-				$("#error").remove();
-			}
-		});
-
-		$("#gst-number").change(function(){
-				var gstVall = $(this).val();
-				var txtpan = $("#pan-number").val();
-				//console.log(panVall);
-
-				var threeToTwelveDigits = gstVall.substring(2,13);
-				//console.log(threeToTwelveDigits);
-
-				if(txtpan != threeToTwelveDigits){
-					$(this).parent().addClass('has-error');
-					$(this).parent().find('.error-message').remove();
-				    $(this).parent().find('label').after('<span class="error-message" id="error">Invalid GST Number. Does not match with PAN number !!</span>');
-				}else if(txtpan.length < 15 || txtpan.length > 15){
-					$(this).parent().addClass('has-error');
-					$(this).parent().find('.error-message').remove();
-				    $(this).parent().find('label').after('<span class="error-message" id="error">GST number has to 15 digits.</span>');
-				}
-				
-		});*/
+		
 		// GST Number End
 
 		// GST Registration Start
