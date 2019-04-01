@@ -1613,17 +1613,48 @@
             });
 
             // Set display name
-            $(".enter-name").change(function(){
-           
+
+            $(".enter-name").blur(function(){
                 var name = $(this).val().toLowerCase();
 
-                $(".company-name").change(function(){
+                if($(this).val().length > 0){
+                    $(".display-name").find('option').remove();
+                    $('.display-name').append('<option value='+name+'>'+name+'</option>');
+                }
+            });
+
+            $(".company-name").blur(function(){
+                var companyName = $(this).val().toLowerCase();
+
+                if($(this).val().length > 0){
+                    $(".display-name").find('option').remove();
+                    $('.display-name').append('<option value='+companyName+'>'+companyName+'</option>');
+                }
+
+                if($('.enter-name').val().length > 0 && $('.company-name').val().length > 0){
+                    $(".display-name").val(companyName);
+                }else if($('.enter-name').val().length > 0 && $('.company-name').val().length == 0){
+                    $(".display-name").val($('.enter-name').val().toLowerCase());
+                }
+            });
+            /*$(".enter-name").blur(function(){
+                
+                $(".display-name").find('option').remove();           
+                var name = $(this).val().toLowerCase();
+
+                $('.display-name').append('<option value='+name+'>'+name+'</option>');
+
+                $(".company-name").blur(function(){
                     var companyName = $(this).val().toLowerCase();
+
+                    $(".display-name").find('option').remove();
 
                     $('.display-name').append('<option value='+name+'>'+name+'</option>');
                     $('.display-name').append('<option value='+companyName+'>'+companyName+'</option>');
+
+                    $(".display-name").val(companyName);
                 });
-            });
+            });*/
 
             // GST Registration Type
 
